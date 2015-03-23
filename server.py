@@ -20,10 +20,10 @@ class Api(object):
         try:
             data = web.data()
             json_data = json.loads(data)
-            matcher.match(json_data)
+            json_response_data = matcher.match(json_data)
+            return json.dumps(json_response_data)
         except web.HTTPError:
             print 'Wrong request'
-
 
 if __name__ == "__main__":
     app = web.application(urls, globals())

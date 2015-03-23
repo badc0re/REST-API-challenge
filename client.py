@@ -23,7 +23,7 @@ class Client(object):
                                      data=json.dumps(json_post_data),
                                      headers=headers)
         #only print the response
-        print post_request
+        print post_request.text
 
     def make_request_to_api(self):
         self.get_json_data()
