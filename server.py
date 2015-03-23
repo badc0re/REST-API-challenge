@@ -2,22 +2,28 @@ import web
 
 
 urls = (
-    '/', 'index'
+    '/', 'Index'
 )
 
 
-class index:
+class NotAcceptable(web.HTTPError):
+    ''' Error Status 406 '''
+    message = "not acceptable"
+    def __init__(self, message=None):
+        status = "406 Not Acceptable"
+        headers = {'Content-Type': 'text/html'}
+        web.HTTPError.__init__(self, status, headers, message or self.message)
+
+
+class Index:
     def POST(self):
         data = None
         try:
-            i = web.input()
-            print i
             data = web.data()
             print data
-            return
-        except Exception, e:
-            print e
-        print data
+            raise NotAcceptable
+        except web.HTTPError:
+            print 'Wrong request'
 
 
 if __name__ == "__main__":
