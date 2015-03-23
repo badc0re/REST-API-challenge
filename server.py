@@ -2,7 +2,7 @@ import web
 
 
 urls = (
-    '/', 'api'
+    '/', 'Api'
 )
 
 
@@ -16,18 +16,34 @@ class NotAcceptable(web.HTTPError):
         web.HTTPError.__init__(self, status, headers, message or self.message)
 
 
-class api:
+class Matcher(object):
+    def __init__(self):
+        self.counter = 0
+        self.storage = []
+
+    def match(self, json_data):
+        print json_data
+        print 'matcher'
+
+
+class Api(object):
+    '''
+        This is the API handling requests
+        and uses Matcher to match data (json).
+    '''
+    def __init__(self):
+        self.matcher = Matcher()
+
     def POST(self):
         data = None
         try:
             data = web.data()
-            print data
+            self.matcher.match(data)
             #raise NotAcceptable
         except web.HTTPError:
             print 'Wrong request'
 
 
 if __name__ == "__main__":
-    app = web.application(urls,
-                          globals())
+    app = web.application(urls, globals())
     app.run()
