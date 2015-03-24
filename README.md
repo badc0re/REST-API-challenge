@@ -37,6 +37,7 @@ All depends on the data and how it changes, which fields are availible and which
 Better web framework, better data validation, better scorer for fuzzy string matching, maybe
 use clustering, but that is not very memory efficent and you also have undefined centroids.
 Have some kind of indexing, we can also use the architecture of the current systems are 
-working like use sharding in order to split the index.
+working like use sharding in order to split the index. Instead of raising an exception for
+406 status, i could add it to the dictionary..
 
 
