@@ -61,7 +61,6 @@ class Matcher(object):
 
         # make input json a movie obect
         movie = self.create_movie(json_data)
-
         # search movie
         for movie_obj in self.storage:
             if movie_obj == movie:
@@ -72,11 +71,13 @@ class Matcher(object):
         # add as new movie
         if not self.response['accepted']:
             self.storage.append(movie)
-            self.response['accepted'] = True
-            self.response['counter']
+            self.response['accepted'] = False
+            self.response['counter'] = 0
 
         return self.response
 
     def reset_response(self):
+        '''Reset the response result.
+        '''
         self.response['counter'] = 0
         self.response['accepted'] = False
