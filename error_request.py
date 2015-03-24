@@ -2,9 +2,9 @@ import web
 
 
 class NotAcceptable(web.HTTPError):
-    ''' 
-        Extend HTTP status to 406.
-        :returns: HTTP error with error status 406
+    '''Extend HTTP status to 406.
+
+    :returns: HTTP error with error status 406
     '''
     def __init__(self, message=None):
         message = "Not acceptable!"
