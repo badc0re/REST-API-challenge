@@ -12,8 +12,7 @@ matcher = Matcher()
 
 
 class Api(object):
-    '''
-       This is the API handling requests
+    '''This is the API handling requests
        and uses Matcher to match data (json).
     
     :raises NotAcceptable: raises 406 error
