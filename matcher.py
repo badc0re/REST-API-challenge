@@ -57,7 +57,7 @@ class Matcher(object):
                 json_data.get('imdb_id', None):
             self.response['accepted'] = False
             self.response['counter'] = 0
-            return self.response
+            raise NotAcceptable
 
         # make input json a movie obect
         movie = self.create_movie(json_data)
@@ -67,12 +67,11 @@ class Matcher(object):
                 self.response['accepted'] = True
                 movie_obj.increase_counter()
                 self.response['counter'] = movie_obj.get_counter()
+                break
 
         # add as new movie
         if not self.response['accepted']:
             self.storage.append(movie)
-            self.response['accepted'] = False
-            self.response['counter'] = 0
 
         return self.response
 

@@ -27,8 +27,6 @@ class Api(object):
             data = web.data()
             json_data = json.loads(data)
             json_response_data = matcher.match(json_data)
-            if not json_response_data['accepted']:
-                raise NotAcceptable
             return json.dumps(json_response_data)
         except web.HTTPError:
             print 'Wrong request'
