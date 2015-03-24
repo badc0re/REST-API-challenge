@@ -49,6 +49,9 @@ class Matcher(object):
                     self.response['accepted'] = True
                     movie.increase_counter()
                     self.response['counter'] = movie.get_counter()
+                else:
+                    self.storage.append(movie)
+                    #TODO: here some response
 
         if not self.response['accepted']:
             raise NotAcceptable

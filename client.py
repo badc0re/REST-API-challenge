@@ -9,6 +9,9 @@ class Client(object):
         self.json_data = []
 
     def get_json_data(self):
+        '''
+            Loads test data from file.
+        '''
         with open(self.data_file) as json_file:
             self.json_data = json.loads(json_file.read())
             json_file.close()
@@ -26,6 +29,10 @@ class Client(object):
         print post_request.text
 
     def make_request_to_api(self):
+        '''
+            Makes json post requests to server.
+            Json data is from file.
+        '''
         self.get_json_data()
         for json_post_data in self.json_data:
             self.post_requests(json_post_data=json_post_data)
