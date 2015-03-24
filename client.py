@@ -6,15 +6,13 @@ class Client(object):
     def __init__(self):
         self.api_url = 'http://localhost:8080/decision'
         self.data_file = 'data/dataset.jl'
-        self.json_data = []
 
     def get_json_data(self):
         '''
             Loads test data from file.
         '''
         with open(self.data_file) as json_file:
-            self.json_data = json.loads(json_file.read())
-            json_file.close()
+            return json.loads(json_file.read())
 
     def post_requests(self, json_post_data=None):
         '''
@@ -33,8 +31,7 @@ class Client(object):
             Makes json post requests to server.
             Json data is from file.
         '''
-        self.get_json_data()
-        for json_post_data in self.json_data:
+        for json_post_data in self.get_json_data():
             self.post_requests(json_post_data=json_post_data)
 
 if __name__ == "__main__":
