@@ -7,17 +7,16 @@ class Matcher(object):
     def __init__(self):
         '''Matcher counter with object storage.
         '''
-        self.counter = 0
         self.storage = []
         self.response = {'accepted': False,
-                         'counter': self.counter}
- 
+                         'counter': 0}
+
     def create_movie(self, json_data):
         '''Creates Movie() object.
-        
+
         :type json_data: dict
         :param json_data: movie data in json format
-        
+
         :rtype Movie: Movie object
         :returns: created movie object
         '''
@@ -25,11 +24,12 @@ class Matcher(object):
         movie_data['imdb_id'] = json_data.get('imdb_id', None)
         movie_data['title'] = json_data.get('title', None)
         movie_data['year'] = json_data.get('year', None)
-        return Movie(*movie_data)
+        movie_data['description'] = json_data.get('description', None)
+        return Movie(**movie_data)
 
     def match(self, json_data):
         '''Match json according to fields.
-        
+
             Performs the following process:
                 1. Validates json.
                 2. Creates movie object.
@@ -38,12 +38,15 @@ class Matcher(object):
 
         :type json_data: dict
         :param json_data: movie data in json format
-        
+
         :raises NotAcceptable: raises 406 error
-        
+
         :rtype response: dict
         :returns: response status of the POST request
         '''
+        # reset the response per request
+        self.reset_response()
+
         # get json required data fields
         # make sure is a dict
         if not isinstance(json_data, dict):
@@ -65,15 +68,15 @@ class Matcher(object):
                 self.response['accepted'] = True
                 movie_obj.increase_counter()
                 self.response['counter'] = movie_obj.get_counter()
-    
+
         # add as new movie
-        if not self.response['accepted']:        
+        if not self.response['accepted']:
             self.storage.append(movie)
             self.response['accepted'] = True
             self.response['counter']
 
         return self.response
-        
+
     def reset_response(self):
-        # TODO: maybe add a function to reset response.
-        pass
+        self.response['counter'] = 0
+        self.response['accepted'] = False
