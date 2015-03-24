@@ -5,8 +5,7 @@ from movie import Movie
 #TODO: change the name
 class Matcher(object):
     def __init__(self):
-        '''
-            Matcher counter with object storage.
+        '''Matcher counter with object storage.
         '''
         self.counter = 0
         self.storage = []
@@ -14,8 +13,13 @@ class Matcher(object):
                          'counter': self.counter}
  
     def create_movie(self, json_data):
-        '''
-            Creates Movie() object.
+        '''Creates Movie() object.
+        
+        :type json_data: dict
+        :param json_data: movie data in json format
+        
+        :rtype Movie: Movie object
+        :returns: created movie object
         '''
         movie_data = {}
         movie_data['imdb_id'] = json_data.get('imdb_id', None)
@@ -24,16 +28,19 @@ class Matcher(object):
         return Movie(*movie_data)
 
     def match(self, json_data):
-        '''
-            Match json according to fields.
-            
+        '''Match json according to fields.
+        
             Performs the following process:
                 1. Validates json.
                 2. Creates movie object.
                 3. Performs matching.
                     3.1 Adds if the object is not found.
 
-            :type json_data: dict
+        :type json_data: dict
+        :param json_data: movie data in json format
+            
+        :rtype response: dict
+        :returns: response status of the POST request
         '''
         # get json required data fields
         # make sure is a dict
