@@ -4,7 +4,7 @@ import json
 
 class Client(object):
     def __init__(self):
-        self.api_url = 'http://localhost:8080/'
+        self.api_url = 'http://localhost:8080/decision'
         self.data_file = 'data/dataset.jl'
         self.json_data = []
 
