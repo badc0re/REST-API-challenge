@@ -13,7 +13,8 @@ fairly simple it uses array to store the json data, first the json request
 is converted into Movie() object and after that for each incoming movie it
 tries to find match based on some rules. Also i have used Cosine scorer in
 order to find string similarities of the tokens, this can be changed if tested
-which scorer will be the most appropriate.
+which scorer will be the most appropriate. The cosine scorers finds string
+similarities in the "title" and "description" fields.
 
 The needed requirements for the challenge are in the "requirements.txt"
 
