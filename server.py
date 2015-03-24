@@ -13,8 +13,13 @@ matcher = Matcher()
 
 class Api(object):
     '''
-        This is the API handling requests
-        and uses Matcher to match data (json).
+       This is the API handling requests
+       and uses Matcher to match data (json).
+    
+    :raises NotAcceptable: raises 406 error
+        
+    :rtype response: dict
+    :returns: response status of the POST request 
     '''
     def POST(self):
         data = None
