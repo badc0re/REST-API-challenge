@@ -38,7 +38,9 @@ class Matcher(object):
 
         :type json_data: dict
         :param json_data: movie data in json format
-            
+        
+        :raises NotAcceptable: raises 406 error
+        
         :rtype response: dict
         :returns: response status of the POST request
         '''
