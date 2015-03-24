@@ -37,6 +37,7 @@ class Client(object):
         for json_post_data in self.get_json_data():
             self.post_requests(json_post_data=json_post_data)
 
+
 if __name__ == "__main__":
     client = Client()
     client.make_request_to_api()
