@@ -14,6 +14,9 @@ class Matcher(object):
                          'counter': self.counter}
  
     def create_movie(self, json_data):
+        '''
+            Creates Movie() object.
+        '''
         movie_data = {}
         movie_data['imdb_id'] = json_data.get('imdb_id', None)
         movie_data['title'] = json_data.get('title', None)
@@ -23,6 +26,12 @@ class Matcher(object):
     def match(self, json_data):
         '''
             Match json according to fields.
+            
+            Performs the following process:
+                1. Validates json.
+                2. Creates movie object.
+                3. Performs matching.
+                    3.1 Adds if the object is not found.
 
             :type json_data: dict
         '''
@@ -38,24 +47,24 @@ class Matcher(object):
             self.response['counter'] = 0
             return self.response
 
+        # make input json a movie obect
         movie = self.create_movie(json_data)
 
-        # if the storage is empty
-        if not self.storage:
+        # search movie
+        for movie_obj in self.storage:
+            if movie_obj == movie:
+                self.response['accepted'] = True
+                movie_obj.increase_counter()
+                self.response['counter'] = movie_obj.get_counter()
+    
+        # add as new movie
+        if not self.response['accepted']:        
             self.storage.append(movie)
-        else:
-            for movie_obj in self.storage:
-                if movie_obj == movie:
-                    self.response['accepted'] = True
-                    movie.increase_counter()
-                    self.response['counter'] = movie.get_counter()
-                else:
-                    # TODO: this is incorrect, it will be
-                    # added for each missmatch
-                    self.storage.append(movie)
-                    #TODO: here some response
-
-        if not self.response['accepted']:
-            raise NotAcceptable
+            self.response['accepted'] = True
+            self.response['counter']
 
         return self.response
+        
+    def reset_response(self):
+        # TODO: maybe add a function to reset response.
+        pass
