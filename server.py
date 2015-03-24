@@ -7,7 +7,7 @@ import web
 urls = (
     '/decision', 'Api'
 )
-
+# make it global until application lives, see line 33
 matcher = Matcher()
 
 
