@@ -42,7 +42,7 @@ class Matcher(object):
 
         # if the storage is empty
         if not self.storage:
-            self.storage.append(json_data)
+            self.storage.append(movie)
         else:
             for movie_obj in self.storage:
                 if movie_obj == movie:
@@ -50,6 +50,8 @@ class Matcher(object):
                     movie.increase_counter()
                     self.response['counter'] = movie.get_counter()
                 else:
+                    # TODO: this is incorrect, it will be
+                    # added for each missmatch
                     self.storage.append(movie)
                     #TODO: here some response
 
