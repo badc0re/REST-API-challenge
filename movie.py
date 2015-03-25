@@ -22,6 +22,7 @@ class Movie(object):
         self.counter += 1
 
     def __eq__(self, other_obj):
+        # TODO: data validation, not very good :(
         if (other_obj.imdb_id and self.imdb_id) and \
                 (other_obj.imdb_id == self.imdb_id):
             # match_by_id
